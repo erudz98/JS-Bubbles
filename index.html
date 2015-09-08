@@ -14,7 +14,9 @@
 
 	<script>
 
-	( function(){
+	var time_pressed = 10;
+
+	(function(){
 
 		var mousedown_time;
 
@@ -28,12 +30,11 @@
 		}
 		document.onmouseup = function(e){
 			time_pressed = getTime() - mousedown_time;
-			console.log('You held your mouse down for', time_pressed, 'miliseconds.');
+			//console.log('You held your mouse down for', time_pressed, 'miliseconds.');
 		}
 
-		//technically we don't even need the mousedown variable but we're leaving it there for now..
-
 	})();
+
 	function Circle(cx, cy, html_id)
 	{
 		var html_id = html_id;
@@ -55,7 +56,7 @@
 			var circle = makeSVG('circle', 
 				{ 	cx: this.info.cx,
 				  	cy: this.info.cy,
-				  	r:  10,
+				  	r:  (time_pressed / 10),
 				  	id: html_id,
 				  	style: "fill: black"
 				});
@@ -124,6 +125,7 @@
 
 	document.onclick = function(e) {
 		playground.createNewCircle(e.x,e.y);
+		console.log(time_pressed);
 	}
 	
 	</script>
